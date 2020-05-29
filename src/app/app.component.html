@@ -16,4 +16,8 @@
         occaecat cupidatat non proident, sunt in culpa qui officia deserunt
         mollit anim id est laborum.
     </p>
+
+    <ul>
+        <li *ngFor="let item of items$ | async">{{ item | json }}</li>
+    </ul>
 </main>

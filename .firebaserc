@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "comic-book-95862": {
+      "hosting": {
+        "comic-book": [
+          "comic-book-95862"
+        ]
+      }
+    }
+  }
+}
