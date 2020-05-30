@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { CharacterService } from 'shared/services/character.service';
 import { Character } from 'shared/models/character';
+import { CharacterService } from 'shared/services/character.service';
 
 @Component({
-    selector: 'app-characters',
-    templateUrl: './characters.component.html',
-    styleUrls: ['./characters.component.css'],
+    selector: 'app-characters-page',
+    templateUrl: './characters-page.component.html',
+    styleUrls: ['./characters-page.component.css'],
 })
-export class CharactersComponent implements OnInit {
+export class CharactersPageComponent implements OnInit {
     characters$: Observable<Character[]>;
 
     constructor(private characterSvc: CharacterService) {}
