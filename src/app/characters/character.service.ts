@@ -8,9 +8,13 @@ import { tap } from 'rxjs/operators';
     providedIn: 'root',
 })
 export class CharacterService {
+    path = 'characters';
+
     constructor(private fs: AngularFirestore) {}
 
     list() {
-        return this.fs.collection<Character>('characters').valueChanges().pipe(tap(console.log));
+        const ref = this.fs.collection<Character>(this.path);
+
+        return ref.valueChanges({ idField: 'id' });
     }
 }
