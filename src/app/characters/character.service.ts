@@ -1,23 +1,11 @@
 import { Injectable } from '@angular/core';
-import {
-    AngularFirestore,
-    AngularFirestoreCollection,
-} from '@angular/fire/firestore';
 
+import { DataService } from '../shared/data.service';
 import { Character } from './character';
 
 @Injectable({
     providedIn: 'root',
 })
-export class CharacterService {
+export class CharacterService extends DataService<Character> {
     protected path = 'characters';
-    protected collection: AngularFirestoreCollection<Character>;
-
-    constructor(private fs: AngularFirestore) {
-        this.collection = this.fs.collection(this.path);
-    }
-
-    list() {
-        return this.collection.valueChanges({ idField: 'id' });
-    }
 }
