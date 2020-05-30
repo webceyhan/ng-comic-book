@@ -1,5 +1,8 @@
 <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4">
     <div class="col mb-4" *ngFor="let character of characters$ | async">
-        <app-character-card [character]="character"></app-character-card>
+        <app-character-card
+            [character]="character"
+            [routerLink]="['.', character.id]"
+        ></app-character-card>
     </div>
 </div>

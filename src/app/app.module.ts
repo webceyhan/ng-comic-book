@@ -9,12 +9,14 @@ import { AppComponent } from './app.component';
 
 import { CharacterCardComponent } from './characters/character-card/character-card.component';
 import { CharactersPageComponent } from './characters/characters-page/characters-page.component';
+import { CharacterPageComponent } from './characters/character-page/character-page.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         CharacterCardComponent,
         CharactersPageComponent,
+        CharacterPageComponent,
     ],
     imports: [
         BrowserModule,
