@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
-import { CharacterService } from 'shared/services/character.service';
 import { Character } from 'shared/models/character';
 
 @Component({
@@ -14,15 +13,9 @@ import { Character } from 'shared/models/character';
 export class CharacterPageComponent implements OnInit {
     character$: Observable<Character>;
 
-    constructor(
-        private route: ActivatedRoute,
-        private characterSvc: CharacterService
-    ) {}
+    constructor(private route: ActivatedRoute) {}
 
     ngOnInit(): void {
-        this.character$ = this.route.params.pipe(
-            map((params) => params.id),
-            switchMap((id) => this.characterSvc.get(id))
-        );
+        this.character$ = this.route.data.pipe(map((data) => data.character));
     }
 }
