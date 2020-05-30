@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { CharacterService } from './character.service';
+import { Character } from './character';
 
 @Component({
     selector: 'app-characters',
@@ -8,11 +10,11 @@ import { CharacterService } from './character.service';
     styleUrls: ['./characters.component.css'],
 })
 export class CharactersComponent implements OnInit {
-    characters = [];
+    characters$: Observable<Character[]>;
 
     constructor(private characterSvc: CharacterService) {}
 
     ngOnInit(): void {
-        this.characters = this.characterSvc.list();
+        this.characters$ = this.characterSvc.list();
     }
 }
