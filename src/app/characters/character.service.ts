@@ -1,20 +1,23 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import {
+    AngularFirestore,
+    AngularFirestoreCollection,
+} from '@angular/fire/firestore';
 
 import { Character } from './character';
-import { tap } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',
 })
 export class CharacterService {
-    path = 'characters';
+    protected path = 'characters';
+    protected collection: AngularFirestoreCollection<Character>;
 
-    constructor(private fs: AngularFirestore) {}
+    constructor(private fs: AngularFirestore) {
+        this.collection = this.fs.collection(this.path);
+    }
 
     list() {
-        const ref = this.fs.collection<Character>(this.path);
-
-        return ref.valueChanges({ idField: 'id' });
+        return this.collection.valueChanges({ idField: 'id' });
     }
 }
