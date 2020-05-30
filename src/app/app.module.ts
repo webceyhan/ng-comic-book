@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { environment } from '../environments/environment';
+import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CharactersComponent } from './characters/characters.component';
@@ -13,9 +12,8 @@ import { CharactersComponent } from './characters/characters.component';
     declarations: [AppComponent, CharactersComponent],
     imports: [
         BrowserModule,
-        NgbModule,
         AngularFireModule.initializeApp(environment.firebase),
-        AngularFirestoreModule,
+        SharedModule,
         AppRoutingModule,
     ],
     providers: [],
