@@ -3,11 +3,7 @@ import { AngularFirestore, QueryFn } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-interface Model {
-    id?: string;
-    createdAt?: number;
-    updatedAt?: number;
-}
+import { Model } from '../models/model';
 
 @Injectable({
     providedIn: 'root',

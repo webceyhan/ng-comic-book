@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { DataService } from '../shared/data.service';
-import { Character } from './character';
+import { DataService } from './data.service';
+import { Character } from '../models/character';
 
 @Injectable({
     providedIn: 'root',
