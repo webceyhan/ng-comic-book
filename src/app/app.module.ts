@@ -7,9 +7,10 @@ import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CharactersComponent } from './characters/characters.component';
+import { CharacterCardComponent } from './characters/character-card/character-card.component';
 
 @NgModule({
-    declarations: [AppComponent, CharactersComponent],
+    declarations: [AppComponent, CharactersComponent, CharacterCardComponent],
     imports: [
         BrowserModule,
         AngularFireModule.initializeApp(environment.firebase),
