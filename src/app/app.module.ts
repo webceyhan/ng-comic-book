@@ -7,10 +7,10 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CharachtersComponent } from './charachters/charachters.component';
+import { CharactersComponent } from './characters/characters.component';
 
 @NgModule({
-    declarations: [AppComponent, CharachtersComponent],
+    declarations: [AppComponent, CharactersComponent],
     imports: [
         BrowserModule,
         NgbModule,
