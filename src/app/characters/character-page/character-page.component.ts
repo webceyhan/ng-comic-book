@@ -12,6 +12,7 @@ import { CharacterService } from 'shared/services/character.service';
     styleUrls: ['./character-page.component.css'],
 })
 export class CharacterPageComponent implements OnInit {
+    editMode = false;
     character$: Observable<Character>;
 
     constructor(
@@ -23,11 +24,12 @@ export class CharacterPageComponent implements OnInit {
         this.character$ = this.route.data.pipe(map((data) => data.character));
     }
 
-    onSave(character: Character): void {
-        this.characterSvc.save(character);
+    onToggleMode() {
+        this.editMode = !this.editMode;
     }
 
-    onEditCancel() {
-        console.log('cancel');
+    onSave(character: Character) {
+        this.characterSvc.save(character);
+        this.onToggleMode();
     }
 }

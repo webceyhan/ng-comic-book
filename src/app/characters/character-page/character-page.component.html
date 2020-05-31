@@ -4,11 +4,22 @@
             <app-character-card [character]="character"></app-character-card>
         </div>
         <div class="col-md-6 mb-4">
+            <!-- edit mode -->
             <app-character-form
+                *ngIf="editMode; else preview"
                 [character]="character"
                 (save)="onSave($event)"
-                (cancel)="onEditCancel()"
+                (cancel)="onToggleMode()"
             ></app-character-form>
+
+            <!-- preview mode -->
+            <ng-template #preview>
+                <button class="btn btn-primary" (click)="onToggleMode()">
+                    Edit
+                </button>
+                <hr>
+                <pre>{{ character | json }}</pre>
+            </ng-template>
         </div>
     </div>
 </ng-container>
