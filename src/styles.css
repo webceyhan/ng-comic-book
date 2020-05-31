@@ -4,8 +4,14 @@ body {
     padding-top: 5rem;
 }
 
-/* VALIDATIONS ************************************************************************************/
+/* ADJUSTMENTS ************************************************************************************/
+.form-check-inline .form-check-input {
+    /* radio button and labels not correctly aligned vertically */
+    margin-top: -1px;
+}
+
 .ng-touched.ng-invalid {
+    /* built-in angular validation should reflect styling */
     border-color: red;
 }
 
