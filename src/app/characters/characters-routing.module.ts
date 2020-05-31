@@ -7,11 +7,19 @@ import { CharacterResolver } from 'shared/resolvers/character.resolver';
 
 const routes: Routes = [
     {
-        path: 'characters/:id',
-        component: CharacterPageComponent,
-        resolve: { character: CharacterResolver },
+        path: 'characters',
+        children: [
+            {
+                path: ':id',
+                component: CharacterPageComponent,
+                resolve: { character: CharacterResolver },
+            },
+            {
+                path: '',
+                component: CharactersPageComponent,
+            },
+        ],
     },
-    { path: 'characters', component: CharactersPageComponent },
 ];
 
 @NgModule({
