@@ -34,40 +34,21 @@
         <label for="alignment" class="">Alignment</label>
         <br />
 
-        <div class="form-check form-check-inline">
+        <div
+            class="form-check form-check-inline"
+            *ngFor="let opt of alignmentOptions"
+        >
             <input
-                id="alignment-hero"
+                id="alignment-{{ opt }}"
                 name="alignment"
                 type="radio"
                 class="form-check-input"
-                value="hero"
+                [value]="opt"
                 [(ngModel)]="character.alignment"
             />
-            <label for="alignment-hero" class="form-check-label">Hero</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input
-                id="alignment-villain"
-                name="alignment"
-                type="radio"
-                class="form-check-input"
-                value="villain"
-                [(ngModel)]="character.alignment"
-            />
-            <label for="alignment-villain" class="form-check-label"
-                >Villain</label
-            >
-        </div>
-        <div class="form-check form-check-inline">
-            <input
-                id="alignment-other"
-                name="alignment"
-                type="radio"
-                class="form-check-input"
-                value="other"
-                [(ngModel)]="character.alignment"
-            />
-            <label for="alignment-other" class="form-check-label">Other</label>
+            <label for="alignment-{{ opt }}" class="form-check-label">{{
+                opt
+            }}</label>
         </div>
     </div>
 

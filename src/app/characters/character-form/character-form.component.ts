@@ -12,6 +12,8 @@ export class CharacterFormComponent implements OnInit {
     @Output() save = new EventEmitter<Character>();
     @Output() cancel = new EventEmitter<void>();
 
+    readonly alignmentOptions = ['hero', 'villain', 'other'];
+
     constructor() {}
 
     ngOnInit(): void {}
