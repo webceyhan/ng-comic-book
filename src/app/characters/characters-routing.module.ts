@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { CharacterPageComponent } from './character-page/character-page.component';
 import { CharactersPageComponent } from './characters-page/characters-page.component';
+import { CharacterDetailPageComponent } from './character-detail-page/character-detail-page.component';
 import { CharacterEditPageComponent } from './character-edit-page/character-edit-page.component';
 import { CharacterResolver } from 'shared/resolvers/character.resolver';
 
@@ -17,7 +17,7 @@ const routes: Routes = [
             },
             {
                 path: ':id',
-                component: CharacterPageComponent,
+                component: CharacterDetailPageComponent,
                 resolve: { character: CharacterResolver },
             },
             {

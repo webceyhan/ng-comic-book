@@ -4,11 +4,11 @@ import { ActivatedRoute } from '@angular/router';
 import { Character } from 'shared/models/character';
 
 @Component({
-    selector: 'app-character-page',
-    templateUrl: './character-page.component.html',
-    styleUrls: ['./character-page.component.css'],
+    selector: 'app-character-detail-page',
+    templateUrl: './character-detail-page.component.html',
+    styleUrls: ['./character-detail-page.component.css'],
 })
-export class CharacterPageComponent implements OnInit {
+export class CharacterDetailPageComponent implements OnInit {
     character: Character;
 
     constructor(private route: ActivatedRoute) {}
