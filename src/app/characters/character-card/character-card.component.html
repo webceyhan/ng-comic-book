@@ -1,5 +1,5 @@
 <div class="card pointer shadow-action">
-    <img [src]="character.imageURL" class="card-img-top" />
+    <img class="card-img-top img-cover" [src]="character.imageURL" fallback />
     <div class="card-body">
         <h5 class="card-title">{{ character.name }}</h5>
     </div>
