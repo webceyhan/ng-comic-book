@@ -1,0 +1,166 @@
+<h2>{{ edit ? "Edit" : "Create new" }} Character</h2>
+
+<br />
+
+<form class="row" #f="ngForm" (ngSubmit)="onSave()">
+    <div class="col-md-5">
+        <!-- image -->
+        <div class="card bg-dark shadow">
+            <img
+                [src]="character.imageURL"
+                class="rounded"
+                style="width: 160px;"
+            />
+        </div>
+
+        <br />
+
+        <!-- name -->
+        <div class="form-group">
+            <label class="required" for="name">Name</label>
+            <input
+                id="name"
+                name="name"
+                type="text"
+                class="form-control"
+                #name="ngModel"
+                [(ngModel)]="character.name"
+                required
+            />
+            <small
+                class="form-text text-danger"
+                *ngIf="f.touched && name.invalid"
+            >
+                <span *ngIf="name.errors.required">Name is required.</span>
+            </small>
+        </div>
+
+        <!-- alias -->
+        <div class="form-group">
+            <label for="alias">Alias</label>
+            <input
+                id="alias"
+                name="alias"
+                type="text"
+                class="form-control"
+                [(ngModel)]="character.alias"
+            />
+        </div>
+
+        <!-- image url -->
+        <div class="form-group">
+            <label for="imageURL">Image URL</label>
+            <input
+                id="imageURL"
+                name="imageURL"
+                type="text"
+                class="form-control"
+                [(ngModel)]="character.imageURL"
+            />
+        </div>
+    </div>
+
+    <div class="col-md-1 border-right"></div>
+
+    <div class="col-md-6">
+        <!-- alignment -->
+        <div class="form-group">
+            <label for="alignment" class="">Alignment</label>
+            <br />
+
+            <div
+                class="form-check form-check-inline"
+                *ngFor="let opt of alignmentOptions"
+            >
+                <input
+                    id="alignment-{{ opt }}"
+                    name="alignment"
+                    type="radio"
+                    class="form-check-input"
+                    [value]="opt"
+                    [(ngModel)]="character.alignment"
+                />
+                <label for="alignment-{{ opt }}" class="form-check-label">{{
+                    opt
+                }}</label>
+            </div>
+        </div>
+
+        <!-- real name -->
+        <div class="form-group">
+            <label for="realName">Real Name</label>
+            <input
+                id="realName"
+                name="realName"
+                type="text"
+                class="form-control"
+                [(ngModel)]="character.realName"
+            />
+        </div>
+
+        <!-- base of operations -->
+        <div class="form-group">
+            <label for="location">Base of operations</label>
+            <input
+                id="location"
+                name="location"
+                type="text"
+                class="form-control"
+                [(ngModel)]="character.location"
+            />
+        </div>
+
+        <!-- occupation -->
+        <div class="form-group">
+            <label for="occupation">Occupation</label>
+            <input
+                id="occupation"
+                name="occupation"
+                type="text"
+                class="form-control"
+                [(ngModel)]="character.occupation"
+            />
+        </div>
+
+        <!-- story -->
+        <div class="form-group">
+            <label class="required" for="story">Story</label>
+            <textarea
+                id="story"
+                name="story"
+                type="text"
+                rows="3"
+                class="form-control"
+                #story="ngModel"
+                [(ngModel)]="character.story"
+                required
+            ></textarea>
+            <small
+                class="form-text text-danger"
+                *ngIf="f.touched && story.invalid"
+            >
+                <span *ngIf="story.errors.required">Story is required.</span>
+            </small>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="btn-toolbar my-4">
+            <button
+                type="submit"
+                class="btn btn-primary mr-2"
+                [disabled]="f.invalid"
+            >
+                Save
+            </button>
+
+            <button
+                type="button"
+                class="btn btn-secondary"
+                (click)="onCancel()"
+            >
+                Cancel
+            </button>
+        </div>
+    </div>
+</form>

@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Character } from 'shared/models/character';
-import { CharacterService } from 'shared/services/character.service';
 
 @Component({
     selector: 'app-character-page',
@@ -12,24 +11,11 @@ import { CharacterService } from 'shared/services/character.service';
     styleUrls: ['./character-page.component.css'],
 })
 export class CharacterPageComponent implements OnInit {
-    editMode = false;
     character$: Observable<Character>;
 
-    constructor(
-        private route: ActivatedRoute,
-        private characterSvc: CharacterService
-    ) {}
+    constructor(private route: ActivatedRoute) {}
 
     ngOnInit(): void {
         this.character$ = this.route.data.pipe(map((data) => data.character));
-    }
-
-    onToggleMode() {
-        this.editMode = !this.editMode;
-    }
-
-    onSave(character: Character) {
-        this.characterSvc.save(character);
-        this.onToggleMode();
     }
 }
