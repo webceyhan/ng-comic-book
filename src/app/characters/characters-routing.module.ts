@@ -11,6 +11,10 @@ const routes: Routes = [
         path: 'characters',
         children: [
             {
+                path: 'new',
+                component: CharacterEditPageComponent,
+            },
+            {
                 path: ':id/edit',
                 component: CharacterEditPageComponent,
                 resolve: { character: CharacterResolver },

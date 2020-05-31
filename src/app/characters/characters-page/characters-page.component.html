@@ -1,3 +1,12 @@
+<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center">
+    <h1 class="display-4">Characters</h1>
+    <a class="btn btn-outline-primary" routerLink="./new">
+        <i class="fas fa-plus mr-1"></i> Add Character
+    </a>
+</div>
+
+<br>
+
 <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4">
     <div class="col mb-4" *ngFor="let character of characters$ | async">
         <app-character-card
