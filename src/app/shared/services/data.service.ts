@@ -44,18 +44,18 @@ export class DataService<T extends Model> {
     }
 
     protected async update(data: T): Promise<T> {
-        // sanitize id
-        const { id } = data;
-        delete data.id;
-
         // update timestamp
         data.updatedAt = new Date().getTime();
 
+        // sanitize payload to update
+        const payload = { ...data };
+        delete payload.id;
+
         // update data
-        await this.doc(id).update(data);
+        await this.doc(data.id).update(payload);
 
         // return updated data
-        return { id, ...data };
+        return { id: data.id, ...data };
     }
 
     // HELPERS /////////////////////////////////////////////////////////////////////////////////////
