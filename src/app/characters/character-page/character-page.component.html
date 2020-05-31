@@ -1,3 +1,14 @@
 <ng-container *ngIf="character$ | async as character">
-    <app-character-card [character]="character"></app-character-card>
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <app-character-card [character]="character"></app-character-card>
+        </div>
+        <div class="col-md-6 mb-4">
+            <app-character-form
+                [character]="character"
+                (save)="onSave($event)"
+                (cancel)="onEditCancel()"
+            ></app-character-form>
+        </div>
+    </div>
 </ng-container>

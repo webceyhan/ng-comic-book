@@ -5,12 +5,14 @@ import { CharactersRoutingModule } from './characters-routing.module';
 import { CharacterCardComponent } from './character-card/character-card.component';
 import { CharactersPageComponent } from './characters-page/characters-page.component';
 import { CharacterPageComponent } from './character-page/character-page.component';
+import { CharacterFormComponent } from './character-form/character-form.component';
 
 @NgModule({
     declarations: [
         CharacterCardComponent,
         CharactersPageComponent,
         CharacterPageComponent,
+        CharacterFormComponent,
     ],
     imports: [SharedModule, CharactersRoutingModule],
 })
