@@ -4,14 +4,20 @@
 
 <form #f="ngForm" (ngSubmit)="onSave()">
     <div class="form-group">
-        <label for="name">Name</label>
+        <label class="required" for="name">Name</label>
         <input
             id="name"
             name="name"
             type="text"
             class="form-control"
+            #name="ngModel"
             [(ngModel)]="character.name"
+            required
         />
+
+        <small class="form-text text-danger" *ngIf="f.touched && name.invalid">
+            <span *ngIf="name.errors.required">Name is required.</span>
+        </small>
     </div>
 
     <div class="form-group">
@@ -26,7 +32,14 @@
     </div>
 
     <div class="btn-toolbar my-4">
-        <button type="submit" class="btn btn-primary mr-2">Save</button>
+        <button
+            type="submit"
+            class="btn btn-primary mr-2"
+            [disabled]="f.invalid"
+        >
+            Save
+        </button>
+
         <button type="button" class="btn btn-secondary" (click)="onCancel()">
             Cancel
         </button>
