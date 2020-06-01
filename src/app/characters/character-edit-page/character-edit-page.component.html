@@ -17,7 +17,7 @@
 
         <!-- alignment -->
         <div class="form-group">
-            <label for="alignment" class="">Alignment</label>
+            <label for="alignment" class="required">Alignment</label>
             <br />
 
             <div
@@ -31,11 +31,19 @@
                     class="form-check-input"
                     [value]="opt"
                     [(ngModel)]="character.alignment"
+                    required
                 />
                 <label for="alignment-{{ opt }}" class="form-check-label">{{
                     opt
                 }}</label>
             </div>
+
+            <small
+                class="form-text text-danger"
+                *ngIf="f.touched && f.controls['alignment'].invalid"
+            >
+                Please choose an alignment.
+            </small>
         </div>
 
         <!-- name -->
@@ -88,7 +96,7 @@
     <div class="col-md-6">
         <!-- gender -->
         <div class="form-group">
-            <label for="gender" class="">Gender</label>
+            <label for="gender" class="required">Gender</label>
             <br />
 
             <div
@@ -102,11 +110,18 @@
                     class="form-check-input"
                     [value]="opt"
                     [(ngModel)]="character.gender"
+                    required
                 />
                 <label for="gender-{{ opt }}" class="form-check-label">{{
                     opt
                 }}</label>
             </div>
+            <small
+                class="form-text text-danger"
+                *ngIf="f.touched && f.controls['gender'].invalid"
+            >
+                Please choose a gender.
+            </small>
         </div>
 
         <!-- real name -->
