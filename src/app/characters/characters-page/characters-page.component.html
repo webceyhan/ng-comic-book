@@ -11,27 +11,7 @@
 
 <div class="row">
     <div class="col-md-3">
-        <form [formGroup]="filterForm">
-            <div formGroupName="alignment">
-                <div
-                    class="form-check"
-                    *ngFor="let opt of alignmentOptions"
-                >
-                    <input
-                        class="form-check-input"
-                        id="alignment-{{ opt }}"
-                        type="checkbox"
-                        [formControlName]="opt"
-                    />
-                    <label
-                        class="form-check-label text-capitalize"
-                        for="alignment-{{ opt }}"
-                    >
-                        {{ opt }}
-                    </label>
-                </div>
-            </div>
-        </form>
+        <app-character-filters (update)="onFilter($event)"></app-character-filters>
     </div>
 
     <div class="col-md-9">

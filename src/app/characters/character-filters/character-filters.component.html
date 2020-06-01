@@ -1,0 +1,24 @@
+<h4>FILTERS</h4>
+
+<form [formGroup]="form">
+    <div class="form-group" formGroupName="alignment">
+        <label>Alignment</label>
+        <div
+            class="form-check"
+            *ngFor="let opt of alignmentOptions"
+        >
+            <input
+                class="form-check-input"
+                id="alignment-{{ opt }}"
+                type="checkbox"
+                [formControlName]="opt"
+            />
+            <label
+                class="form-check-label text-capitalize"
+                for="alignment-{{ opt }}"
+            >
+                {{ opt }}
+            </label>
+        </div>
+    </div>
+</form>

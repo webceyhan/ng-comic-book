@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Query } from '@angular/fire/firestore/interfaces';
 import { Observable, BehaviorSubject } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 
 import { Character } from 'shared/models/character';
 import { CharacterService } from 'shared/services/character.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { switchMap, tap, map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-characters-page',
@@ -12,50 +12,24 @@ import { switchMap, tap, map } from 'rxjs/operators';
     styleUrls: ['./characters-page.component.css'],
 })
 export class CharactersPageComponent implements OnInit {
+    query$ = new BehaviorSubject(undefined);
     characters$: Observable<Character[]>;
 
-    filterForm: FormGroup;
-    filters$ = new BehaviorSubject<any>({});
-
-    readonly alignmentOptions = ['hero', 'villain', 'other'];
-
-    constructor(
-        private fb: FormBuilder,
-        private characterSvc: CharacterService
-    ) {}
+    constructor(private characterSvc: CharacterService) {}
 
     ngOnInit(): void {
-        this.filterForm = this.fb.group({
-            alignment: this.fb.group({
-                hero: [false],
-                villain: [false],
-                other: [false],
-            }),
-        });
-
-        this.filterForm.valueChanges.subscribe((values) => {
-            this.filters$.next(values);
-        });
-
-        this.characters$ = this.filters$.pipe(
-            map((filters) => filters || {}),
-            map((filters) => {
-                const alignment = Object.entries(filters.alignment || {})
-                    .filter(([k, v]) => !!v)
-                    .map(([k, v]) => k);
-
-                return { alignment };
-            }),
-
-            switchMap((filters) => {
-                return this.characterSvc.list((ref) => {
-                    if (filters.alignment.length > 0) {
-                        return ref.where('alignment', 'in', filters.alignment);
-                    }
-
-                    return ref;
-                });
-            })
+        this.characters$ = this.query$.pipe(
+            switchMap((query) => this.characterSvc.list(query))
         );
+    }
+
+    onFilter(filters) {
+        this.query$.next((q: Query) => {
+            if (filters.alignment) {
+                q = q.where('alignment', 'in', filters.alignment);
+            }
+
+            return q;
+        });
     }
 }

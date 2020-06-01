@@ -6,6 +6,7 @@ import { CharacterCardComponent } from './character-card/character-card.componen
 import { CharactersPageComponent } from './characters-page/characters-page.component';
 import { CharacterDetailPageComponent } from './character-detail-page/character-detail-page.component';
 import { CharacterEditPageComponent } from './character-edit-page/character-edit-page.component';
+import { CharacterFiltersComponent } from './character-filters/character-filters.component';
 
 @NgModule({
     declarations: [
@@ -13,6 +14,7 @@ import { CharacterEditPageComponent } from './character-edit-page/character-edit
         CharactersPageComponent,
         CharacterDetailPageComponent,
         CharacterEditPageComponent,
+        CharacterFiltersComponent,
     ],
     imports: [SharedModule, CharactersRoutingModule],
 })
