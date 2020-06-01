@@ -1,24 +1,60 @@
 <h4>FILTERS</h4>
 
 <form [formGroup]="form">
-    <div class="form-group" formGroupName="alignment">
-        <label>Alignment</label>
-        <div
-            class="form-check"
-            *ngFor="let opt of alignmentOptions"
-        >
+    <hr />
+    <!-- gender -->
+    <div class="form-group">
+        <label>Gender</label>
+        <div class="form-check" *ngFor="let opt of genders">
             <input
+                type="radio"
+                id="gender-{{ opt }}"
                 class="form-check-input"
-                id="alignment-{{ opt }}"
-                type="checkbox"
-                [formControlName]="opt"
+                formControlName="gender"
+                [value]="opt"
             />
             <label
                 class="form-check-label text-capitalize"
-                for="alignment-{{ opt }}"
+                for="gender-{{ opt }}"
             >
                 {{ opt }}
             </label>
         </div>
+        <button
+            class="btn btn-link btn-sm pl-0"
+            *ngIf="form.get('gender').value"
+            (click)="form.patchValue({ gender: null })"
+        >
+            clear
+        </button>
+    </div>
+
+    <hr />
+
+    <!-- alignment -->
+    <div class="form-group" formArrayName="alignment">
+        <label>Alignment</label>
+        <div class="form-check" *ngFor="let opt of alignments; let i = index">
+            <input
+                id="alignment-{{ i }}"
+                class="form-check-input"
+                type="checkbox"
+                [formControlName]="i"
+            />
+            <label
+                class="form-check-label text-capitalize"
+                for="alignment-{{ i }}"
+            >
+                {{ opt }}
+            </label>
+        </div>
+
+        <button
+            class="btn btn-link btn-sm pl-0"
+            *ngIf="form.get('alignment').value === {}"
+            (click)="form.patchValue({ alignment: null })"
+        >
+            clear
+        </button>
     </div>
 </form>

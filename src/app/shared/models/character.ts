@@ -1,6 +1,6 @@
 import { Model } from './model';
 
-type Gender = 'male' | 'female' | 'other';
+type Gender = 'male' | 'female';
 type Alignment = 'hero' | 'villain' | 'other';
 
 export interface Character extends Model {

@@ -25,7 +25,11 @@ export class CharactersPageComponent implements OnInit {
 
     onFilter(filters) {
         this.query$.next((q: Query) => {
-            if (filters.alignment) {
+            if (filters.gender) {
+                q = q.where('gender', '==', filters.gender);
+            }
+
+            if (filters.alignment.length > 0) {
                 q = q.where('alignment', 'in', filters.alignment);
             }
 

@@ -12,7 +12,7 @@ import { Character } from 'shared/models/character';
 export class CharacterEditPageComponent implements OnInit {
     character = {} as Character;
 
-    readonly genders = ['male', 'female', 'other'];
+    readonly genders = ['male', 'female'];
     readonly alignments = ['hero', 'villain', 'other'];
 
     constructor(

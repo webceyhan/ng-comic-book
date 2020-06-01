@@ -20,17 +20,17 @@ export class CharacterFiltersComponent implements OnInit, OnDestroy {
     form: FormGroup;
     changeSub: Subscription;
 
-    readonly alignmentOptions = ['hero', 'villain', 'other'];
+    readonly genders = ['male', 'female'];
+    readonly alignments = ['hero', 'villain', 'other'];
 
     constructor(private fb: FormBuilder) {}
 
     ngOnInit(): void {
         this.form = this.fb.group({
-            alignment: this.fb.group({
-                hero: [false],
-                villain: [false],
-                other: [false],
-            }),
+            gender: [''],
+            alignment: this.fb.array(
+                this.alignments.map((a) => this.fb.control(false))
+            ),
         });
 
         this.changeSub = this.form.valueChanges.subscribe((value) =>
@@ -42,23 +42,11 @@ export class CharacterFiltersComponent implements OnInit, OnDestroy {
         this.changeSub.unsubscribe();
     }
 
-    onUpdate(value) {
-        const alignment = this.parseAlignment(value);
-
-        this.update.next({
-            alignment,
+    onUpdate(value: any) {
+        const alignment = this.alignments.filter((v, i) => {
+            return value.alignment[i];
         });
-    }
 
-    // HELPERS /////////////////////////////////////////////////////////////////////////////////////
-
-    private parseAlignment(value) {
-        // normalize alignment filter
-        const alignment = Object.entries(value.alignment)
-            .filter(([, v]) => !!v)
-            .map(([k]) => k);
-
-        // set filter if contains any value or null
-        return alignment.length > 0 ? alignment : null;
+        this.update.next({ ...value, alignment });
     }
 }
