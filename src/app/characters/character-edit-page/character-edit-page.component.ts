@@ -12,7 +12,8 @@ import { Character } from 'shared/models/character';
 export class CharacterEditPageComponent implements OnInit {
     character = {} as Character;
 
-    readonly alignmentOptions = ['hero', 'villain', 'other'];
+    readonly genders = ['male', 'female', 'other'];
+    readonly alignments = ['hero', 'villain', 'other'];
 
     constructor(
         private route: ActivatedRoute,

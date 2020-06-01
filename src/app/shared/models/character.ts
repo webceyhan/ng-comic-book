@@ -1,13 +1,17 @@
 import { Model } from './model';
 
+type Gender = 'male' | 'female' | 'other';
+type Alignment = 'hero' | 'villain' | 'other';
+
 export interface Character extends Model {
     name: string;
-    alias: string;
+    alias?: string;
+    alignment: Alignment;
     realName?: string;
+    gender: Gender;
     location?: string;
     occupation?: string;
-    alignment: 'hero' | 'villain' | 'other';
-    powers: string[];
-    imageURL: string;
+    powers?: string[];
+    imageURL?: string;
     story: string;
 }

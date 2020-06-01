@@ -15,6 +15,29 @@
 
         <br />
 
+        <!-- alignment -->
+        <div class="form-group">
+            <label for="alignment" class="">Alignment</label>
+            <br />
+
+            <div
+                class="form-check form-check-inline"
+                *ngFor="let opt of alignments"
+            >
+                <input
+                    id="alignment-{{ opt }}"
+                    name="alignment"
+                    type="radio"
+                    class="form-check-input"
+                    [value]="opt"
+                    [(ngModel)]="character.alignment"
+                />
+                <label for="alignment-{{ opt }}" class="form-check-label">{{
+                    opt
+                }}</label>
+            </div>
+        </div>
+
         <!-- name -->
         <div class="form-group">
             <label class="required" for="name">Name</label>
@@ -63,24 +86,24 @@
     <div class="col-md-1 border-right"></div>
 
     <div class="col-md-6">
-        <!-- alignment -->
+        <!-- gender -->
         <div class="form-group">
-            <label for="alignment" class="">Alignment</label>
+            <label for="gender" class="">Gender</label>
             <br />
 
             <div
                 class="form-check form-check-inline"
-                *ngFor="let opt of alignmentOptions"
+                *ngFor="let opt of genders"
             >
                 <input
-                    id="alignment-{{ opt }}"
-                    name="alignment"
+                    id="gender-{{ opt }}"
+                    name="gender"
                     type="radio"
                     class="form-check-input"
                     [value]="opt"
-                    [(ngModel)]="character.alignment"
+                    [(ngModel)]="character.gender"
                 />
-                <label for="alignment-{{ opt }}" class="form-check-label">{{
+                <label for="gender-{{ opt }}" class="form-check-label">{{
                     opt
                 }}</label>
             </div>
