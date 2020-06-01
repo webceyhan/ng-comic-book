@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
@@ -10,10 +10,17 @@ const DECLARATIONS = [ImgFallbackDirective];
 
 @NgModule({
     declarations: DECLARATIONS,
-    imports: [CommonModule, FormsModule, NgbModule, AngularFirestoreModule],
+    imports: [
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NgbModule,
+        AngularFirestoreModule,
+    ],
     exports: [
         CommonModule,
         FormsModule,
+        ReactiveFormsModule,
         NgbModule,
         AngularFirestoreModule,
         ...DECLARATIONS,

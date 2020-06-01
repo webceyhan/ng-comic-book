@@ -1,17 +1,47 @@
-<div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center">
+<div
+    class="d-flex flex-column flex-md-row justify-content-between align-items-md-center"
+>
     <h1 class="display-4">Characters</h1>
     <a class="btn btn-outline-primary" routerLink="./new">
         <i class="fas fa-plus mr-1"></i> Add Character
     </a>
 </div>
 
-<br>
+<br />
 
-<div class="row row-cols-1 row-cols-md-3 row-cols-lg-4">
-    <div class="col mb-4" *ngFor="let character of characters$ | async">
-        <app-character-card
-            [character]="character"
-            [routerLink]="['.', character.id]"
-        ></app-character-card>
+<div class="row">
+    <div class="col-md-3">
+        <form [formGroup]="filterForm">
+            <div formGroupName="alignment">
+                <div
+                    class="form-check"
+                    *ngFor="let opt of alignmentOptions"
+                >
+                    <input
+                        class="form-check-input"
+                        id="alignment-{{ opt }}"
+                        type="checkbox"
+                        [formControlName]="opt"
+                    />
+                    <label
+                        class="form-check-label text-capitalize"
+                        for="alignment-{{ opt }}"
+                    >
+                        {{ opt }}
+                    </label>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-9">
+        <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4">
+            <div class="col mb-4" *ngFor="let character of characters$ | async">
+                <app-character-card
+                    [character]="character"
+                    [routerLink]="['.', character.id]"
+                ></app-character-card>
+            </div>
+        </div>
     </div>
 </div>
