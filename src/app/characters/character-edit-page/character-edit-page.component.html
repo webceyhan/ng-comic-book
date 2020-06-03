@@ -188,6 +188,7 @@
                 class="form-control"
                 (keyup.enter)="onAddPower(power)"
                 placeholder="type and press enter to add.."
+                [ngbTypeahead]="powerSearch"
             />
         </div>
 

@@ -4,6 +4,15 @@ import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 
 import { Character } from 'shared/models/character';
 import { CharacterService } from 'shared/services/character.service';
+import { Observable, of } from 'rxjs';
+import {
+    debounceTime,
+    distinctUntilChanged,
+    map,
+    switchMap,
+    tap,
+    take,
+} from 'rxjs/operators';
 
 @Component({
     selector: 'app-character-edit-page',
@@ -15,6 +24,8 @@ export class CharacterEditPageComponent implements OnInit {
 
     readonly genders = ['male', 'female'];
     readonly alignments = ['hero', 'villain', 'other'];
+
+    powerList: string[] = [];
 
     constructor(
         private fb: FormBuilder,
@@ -47,6 +58,20 @@ export class CharacterEditPageComponent implements OnInit {
             story: [character.story || '', Validators.required],
             powers: this.fb.array(character.powers || []),
         });
+
+        // pre-fetch all powers into a list
+        this.characterSvc
+            .list()
+            .pipe(
+                take(1),
+                map((list) => list.map((o) => o.powers || [])),
+                // flatten all powers arrays
+                map((list) => list.reduce((sum, o) => [...sum, ...o], [])),
+                // filter unique values only
+                map(list => list.filter((o, i, self) => self.indexOf(o) === i))
+            )
+            .toPromise()
+            .then((list) => (this.powerList = list));
     }
 
     async onSave() {
@@ -66,4 +91,21 @@ export class CharacterEditPageComponent implements OnInit {
     onRemovePower(index: number) {
         this.powers.removeAt(index);
     }
+
+    powerSearch = (text$: Observable<string>) =>
+        text$.pipe(
+            debounceTime(200),
+            distinctUntilChanged(),
+            map((term) => term.toLowerCase()),
+            map((term) => {
+                // prevent suggestion before 2 characters
+                if (term.length < 2) return [] as Character[];
+
+                return this.powerList
+                    .filter((v) => v.toLowerCase().indexOf(term) > -1)
+                    // exclude powers of this character
+                    .filter((o) => !this.form.value.powers.includes(o))
+                    .slice(0, 10); // limit to 10
+            })
+        );
 }
