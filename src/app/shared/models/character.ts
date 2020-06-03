@@ -15,3 +15,6 @@ export interface Character extends Model {
     imageURL?: string;
     story: string;
 }
+
+export const GENDERS = ['male', 'female'];
+export const ALIGNMENTS = ['hero', 'villain', 'complicated'];

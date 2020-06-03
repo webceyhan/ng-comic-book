@@ -8,6 +8,8 @@ import {
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
+import { GENDERS, ALIGNMENTS } from 'shared/models/character';
+
 @Component({
     selector: 'app-character-filters',
     templateUrl: './character-filters.component.html',
@@ -20,8 +22,8 @@ export class CharacterFiltersComponent implements OnInit, OnDestroy {
     form: FormGroup;
     changeSub: Subscription;
 
-    readonly genders = ['male', 'female'];
-    readonly alignments = ['hero', 'villain', 'complicated'];
+    readonly genders = GENDERS;
+    readonly alignments = ALIGNMENTS;
 
     constructor(private fb: FormBuilder) {}
 
