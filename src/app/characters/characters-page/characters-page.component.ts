@@ -19,8 +19,8 @@ export class CharactersPageComponent implements OnInit {
     sortMenu: Item[] = [
         { label: 'A-Z', value: 'name:asc' },
         { label: 'Z-A', value: 'name:desc' },
-        { label: 'Newest to Oldest', value: 'id:asc' },
-        { label: 'Oldest to Newest', value: 'id:desc' },
+        { label: 'Newest to Oldest', value: 'createdAt:asc' },
+        { label: 'Oldest to Newest', value: 'createdAt:desc' },
     ];
 
     constructor(private characterSvc: CharacterService) {}
@@ -50,7 +50,7 @@ export class CharactersPageComponent implements OnInit {
         const [field, direction] = value.split(':');
 
         this.query$.next((q: Query) => {
-            return q.orderBy('createdAt', direction as any);
+            return q.orderBy(field, direction as any);
         });
     }
 }
