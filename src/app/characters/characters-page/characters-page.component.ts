@@ -1,11 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { Query } from '@angular/fire/firestore/interfaces';
+import { Query, QueryFn } from '@angular/fire/firestore';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, map } from 'rxjs/operators';
 
 import { Character } from 'shared/models/character';
 import { CharacterService } from 'shared/services/character.service';
 import { Item } from 'shared/models/item';
+
+interface QueryParams {
+    sort?: { field: string; direction?: string };
+    gender?: string;
+    alignment?: string[];
+}
 
 @Component({
     selector: 'app-characters-page',
@@ -13,7 +19,7 @@ import { Item } from 'shared/models/item';
     styleUrls: ['./characters-page.component.css'],
 })
 export class CharactersPageComponent implements OnInit {
-    query$ = new BehaviorSubject(undefined);
+    queryParams$ = new BehaviorSubject<QueryParams>({});
     characters$: Observable<Character[]>;
 
     sortMenu: Item[] = [
@@ -26,22 +32,16 @@ export class CharactersPageComponent implements OnInit {
     constructor(private characterSvc: CharacterService) {}
 
     ngOnInit(): void {
-        this.characters$ = this.query$.pipe(
+        this.characters$ = this.queryParams$.pipe(
+            map((params) => this.buildQuery(params)),
             switchMap((query) => this.characterSvc.list(query))
         );
     }
 
     onFilter(filters) {
-        this.query$.next((q: Query) => {
-            if (filters.gender) {
-                q = q.where('gender', '==', filters.gender);
-            }
-
-            if (filters.alignment.length > 0) {
-                q = q.where('alignment', 'in', filters.alignment);
-            }
-
-            return q;
+        this.queryParams$.next({
+            ...this.queryParams$.value,
+            ...filters,
         });
     }
 
@@ -49,8 +49,26 @@ export class CharactersPageComponent implements OnInit {
         const value = item.value as string;
         const [field, direction] = value.split(':');
 
-        this.query$.next((q: Query) => {
-            return q.orderBy(field, direction as any);
+        this.queryParams$.next({
+            ...this.queryParams$.value,
+            sort: { field, direction },
         });
+    }
+
+    buildQuery(params: QueryParams): QueryFn {
+        return (q: Query) => {
+            if (params.gender) {
+                q = q.where('gender', '==', params.gender);
+            }
+
+            if (params.alignment?.length > 0) {
+                q = q.where('alignment', 'in', params.alignment);
+            }
+
+            const { field, direction } = params?.sort || {};
+            q = q.orderBy(field || 'name', direction || 'asc' as any);
+
+            return q;
+        };
     }
 }
