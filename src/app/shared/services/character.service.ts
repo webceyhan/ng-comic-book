@@ -8,4 +8,18 @@ import { Character } from '../models/character';
 })
 export class CharacterService extends DataService<Character> {
     protected path = 'characters';
+
+    // updateAll() {
+    //     this.collection()
+    //         .get()
+    //         .toPromise()
+    //         .then((list) => {
+    //             list.docs.forEach((doc) => {
+    //                 const { createdAt, updatedAt } = doc.data();
+    //                 doc.ref.update({
+    //                     createdAt: createdAt || updatedAt,
+    //                 });
+    //             });
+    //         });
+    // }
 }

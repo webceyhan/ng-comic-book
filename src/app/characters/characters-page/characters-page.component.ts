@@ -5,6 +5,7 @@ import { switchMap } from 'rxjs/operators';
 
 import { Character } from 'shared/models/character';
 import { CharacterService } from 'shared/services/character.service';
+import { Item } from 'shared/models/item';
 
 @Component({
     selector: 'app-characters-page',
@@ -14,6 +15,13 @@ import { CharacterService } from 'shared/services/character.service';
 export class CharactersPageComponent implements OnInit {
     query$ = new BehaviorSubject(undefined);
     characters$: Observable<Character[]>;
+
+    sortMenu: Item[] = [
+        { label: 'A-Z', value: 'name:asc' },
+        { label: 'Z-A', value: 'name:desc' },
+        { label: 'Newest to Oldest', value: 'id:asc' },
+        { label: 'Oldest to Newest', value: 'id:desc' },
+    ];
 
     constructor(private characterSvc: CharacterService) {}
 
@@ -34,6 +42,15 @@ export class CharactersPageComponent implements OnInit {
             }
 
             return q;
+        });
+    }
+
+    onSort(item: Item) {
+        const value = item.value as string;
+        const [field, direction] = value.split(':');
+
+        this.query$.next((q: Query) => {
+            return q.orderBy('createdAt', direction as any);
         });
     }
 }

@@ -1,0 +1,17 @@
+<div ngbDropdown class="d-inline-block">
+    <!-- toggle button -->
+    <button ngbDropdownToggle class="btn btn-outline-primary">
+        {{ items[index]?.label }}
+    </button>
+
+    <!-- menu -->
+    <div ngbDropdownMenu>
+        <button
+            ngbDropdownItem
+            *ngFor="let item of items; let i = index"
+            (click)="onSelect(i)"
+        >
+            {{ item.label }}
+        </button>
+    </div>
+</div>
