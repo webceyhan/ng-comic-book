@@ -2,18 +2,21 @@
 
 <br />
 
-<form class="row" #f="ngForm" (ngSubmit)="onSave()">
+<form class="row" [formGroup]="form" (ngSubmit)="onSave()">
     <div class="col-md-5">
         <!-- image -->
         <div class="card bg-dark shadow">
             <img
-                [src]="character.imageURL"
+                [src]="form.value.imageURL"
                 class="img-cover rounded"
                 fallback
             />
         </div>
 
         <br />
+
+        <!-- id -->
+        <input type="hidden" formControlName="id" />
 
         <!-- alignment -->
         <div class="form-group">
@@ -26,12 +29,10 @@
             >
                 <input
                     id="alignment-{{ opt }}"
-                    name="alignment"
                     type="radio"
                     class="form-check-input"
                     [value]="opt"
-                    [(ngModel)]="character.alignment"
-                    required
+                    formControlName="alignment"
                 />
                 <label for="alignment-{{ opt }}" class="form-check-label">{{
                     opt
@@ -40,7 +41,7 @@
 
             <small
                 class="form-text text-danger"
-                *ngIf="f.touched && f.controls['alignment'].invalid"
+                *ngIf="form.touched && form.controls['alignment'].invalid"
             >
                 Please choose an alignment.
             </small>
@@ -51,18 +52,17 @@
             <label class="required" for="name">Name</label>
             <input
                 id="name"
-                name="name"
                 type="text"
                 class="form-control"
-                #name="ngModel"
-                [(ngModel)]="character.name"
-                required
+                formControlName="name"
             />
             <small
                 class="form-text text-danger"
-                *ngIf="f.touched && name.invalid"
+                *ngIf="form.touched && form.controls['name'].invalid"
             >
-                <span *ngIf="name.errors.required">Name is required.</span>
+                <span *ngIf="form.controls['name'].errors.required"
+                    >Name is required.</span
+                >
             </small>
         </div>
 
@@ -71,10 +71,9 @@
             <label for="alias">Alias</label>
             <input
                 id="alias"
-                name="alias"
                 type="text"
                 class="form-control"
-                [(ngModel)]="character.alias"
+                formControlName="alias"
             />
         </div>
 
@@ -83,10 +82,9 @@
             <label for="imageURL">Image URL</label>
             <input
                 id="imageURL"
-                name="imageURL"
                 type="text"
                 class="form-control"
-                [(ngModel)]="character.imageURL"
+                formControlName="imageURL"
             />
         </div>
     </div>
@@ -105,12 +103,10 @@
             >
                 <input
                     id="gender-{{ opt }}"
-                    name="gender"
                     type="radio"
                     class="form-check-input"
+                    formControlName="gender"
                     [value]="opt"
-                    [(ngModel)]="character.gender"
-                    required
                 />
                 <label for="gender-{{ opt }}" class="form-check-label">{{
                     opt
@@ -118,7 +114,7 @@
             </div>
             <small
                 class="form-text text-danger"
-                *ngIf="f.touched && f.controls['gender'].invalid"
+                *ngIf="form.touched && form.controls['gender'].invalid"
             >
                 Please choose a gender.
             </small>
@@ -129,10 +125,9 @@
             <label for="realName">Real Name</label>
             <input
                 id="realName"
-                name="realName"
                 type="text"
                 class="form-control"
-                [(ngModel)]="character.realName"
+                formControlName="realName"
             />
         </div>
 
@@ -141,10 +136,9 @@
             <label for="location">Base of operations</label>
             <input
                 id="location"
-                name="location"
                 type="text"
                 class="form-control"
-                [(ngModel)]="character.location"
+                formControlName="location"
             />
         </div>
 
@@ -153,10 +147,9 @@
             <label for="occupation">Occupation</label>
             <input
                 id="occupation"
-                name="occupation"
                 type="text"
                 class="form-control"
-                [(ngModel)]="character.occupation"
+                formControlName="occupation"
             />
         </div>
 
@@ -165,19 +158,18 @@
             <label class="required" for="story">Story</label>
             <textarea
                 id="story"
-                name="story"
                 type="text"
                 rows="3"
                 class="form-control"
-                #story="ngModel"
-                [(ngModel)]="character.story"
-                required
+                formControlName="story"
             ></textarea>
             <small
                 class="form-text text-danger"
-                *ngIf="f.touched && story.invalid"
+                *ngIf="form.touched && form.controls['story'].invalid"
             >
-                <span *ngIf="story.errors.required">Story is required.</span>
+                <span *ngIf="form.controls['story'].errors.required"
+                    >Story is required.</span
+                >
             </small>
         </div>
     </div>
@@ -187,7 +179,7 @@
             <button
                 type="submit"
                 class="btn btn-primary mr-2"
-                [disabled]="f.invalid"
+                [disabled]="form.invalid"
             >
                 Save
             </button>
