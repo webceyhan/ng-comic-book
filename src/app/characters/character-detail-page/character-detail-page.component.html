@@ -66,6 +66,11 @@
         </div>
         <hr />
         <div class="row">
+            <strong class="col-md-4">Powers</strong>
+            <span class="col">{{ (character.powers || []).join(", ") }}</span>
+        </div>
+        <hr />
+        <div class="row">
             <strong class="col-md-4">Last Update</strong>
             <span class="col">{{ character.updatedAt | date }}</span>
         </div>

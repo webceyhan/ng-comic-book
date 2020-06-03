@@ -2,7 +2,12 @@
 
 <br />
 
-<form class="row" [formGroup]="form" (ngSubmit)="onSave()">
+<form
+    class="row"
+    [formGroup]="form"
+    (ngSubmit)="onSave()"
+    (keydown.enter)="$event.preventDefault()"
+>
     <div class="col-md-5">
         <!-- image -->
         <div class="card bg-dark shadow">
@@ -171,6 +176,31 @@
                     >Story is required.</span
                 >
             </small>
+        </div>
+
+        <!-- powers -->
+        <div class="form-group">
+            <label for="power">Powers</label>
+            <input
+                #power
+                id="power"
+                type="text"
+                class="form-control"
+                (keyup.enter)="onAddPower(power)"
+                placeholder="type and press enter to add.."
+            />
+        </div>
+
+        <div>
+            <span
+                class="badge badge-light m-1"
+                *ngFor="let p of powers.controls; let i = index"
+            >
+                {{ p.value }}
+                <button type="button" class="btn btn-link btn-sm py-0" (click)="onRemovePower(i)">
+                    x
+                </button>
+            </span>
         </div>
     </div>
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 
 import { Character } from 'shared/models/character';
 import { CharacterService } from 'shared/services/character.service';
@@ -27,6 +27,10 @@ export class CharacterEditPageComponent implements OnInit {
         return !!this.form.value.id;
     }
 
+    get powers() {
+        return this.form.get('powers') as FormArray;
+    }
+
     ngOnInit(): void {
         const character: Character = this.route.snapshot.data.character || {};
 
@@ -41,6 +45,7 @@ export class CharacterEditPageComponent implements OnInit {
             location: [character.location || ''],
             occupation: [character.occupation || ''],
             story: [character.story || '', Validators.required],
+            powers: this.fb.array(character.powers || []),
         });
     }
 
@@ -51,5 +56,14 @@ export class CharacterEditPageComponent implements OnInit {
 
     onCancel() {
         this.router.navigate(['..'], { relativeTo: this.route });
+    }
+
+    onAddPower(input: HTMLInputElement) {
+        this.powers.push(this.fb.control(input.value));
+        input.value = '';
+    }
+
+    onRemovePower(index: number) {
+        this.powers.removeAt(index);
     }
 }
