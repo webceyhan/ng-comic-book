@@ -23,7 +23,7 @@ export class CharacterEditPageComponent implements OnInit {
     form: FormGroup;
 
     readonly genders = ['male', 'female'];
-    readonly alignments = ['hero', 'villain', 'other'];
+    readonly alignments = ['hero', 'villain', 'complicated'];
 
     powerList: string[] = [];
 

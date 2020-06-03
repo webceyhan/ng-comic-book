@@ -21,7 +21,7 @@ export class CharacterFiltersComponent implements OnInit, OnDestroy {
     changeSub: Subscription;
 
     readonly genders = ['male', 'female'];
-    readonly alignments = ['hero', 'villain', 'other'];
+    readonly alignments = ['hero', 'villain', 'complicated'];
 
     constructor(private fb: FormBuilder) {}
 

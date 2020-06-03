@@ -1,7 +1,7 @@
 import { Model } from './model';
 
 type Gender = 'male' | 'female';
-type Alignment = 'hero' | 'villain' | 'other';
+type Alignment = 'hero' | 'villain' | 'complicated';
 
 export interface Character extends Model {
     name: string;
