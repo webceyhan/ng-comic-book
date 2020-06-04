@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, map, take } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import {
+    debounceTime,
+    distinctUntilChanged,
+    map,
+    switchMap,
+} from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
 
 import { Character, GENDERS, ALIGNMENTS } from 'shared/models/character';
 import { CharacterService } from 'shared/services/character.service';
@@ -17,8 +22,6 @@ export class CharacterEditPageComponent implements OnInit {
 
     readonly genders = GENDERS;
     readonly alignments = ALIGNMENTS;
-
-    powerList: string[] = [];
 
     constructor(
         private fb: FormBuilder,
@@ -51,22 +54,6 @@ export class CharacterEditPageComponent implements OnInit {
             story: [character.story || '', Validators.required],
             powers: this.fb.array(character.powers || []),
         });
-
-        // pre-fetch all powers into a list
-        this.characterSvc
-            .list()
-            .pipe(
-                take(1),
-                map((list) => list.map((o) => o.powers || [])),
-                // flatten all powers arrays
-                map((list) => list.reduce((sum, o) => [...sum, ...o], [])),
-                // filter unique values only
-                map((list) =>
-                    list.filter((o, i, self) => self.indexOf(o) === i)
-                )
-            )
-            .toPromise()
-            .then((list) => (this.powerList = list));
     }
 
     async onSave() {
@@ -92,17 +79,20 @@ export class CharacterEditPageComponent implements OnInit {
             debounceTime(200),
             distinctUntilChanged(),
             map((term) => term.toLowerCase()),
-            map((term) => {
+            switchMap((term) => {
                 // prevent suggestion before 2 characters
-                if (term.length < 2) return [] as Character[];
+                if (term.length < 2) return of([] as Character[]);
 
-                return (
-                    this.powerList
-                        .filter((v) => v.toLowerCase().indexOf(term) > -1)
-                        // exclude powers of this character
-                        .filter((o) => !this.form.value.powers.includes(o))
-                        .slice(0, 10)
-                ); // limit to 10
+                return this.characterSvc.listPowers().pipe(
+                    map((list) =>
+                        list
+                            .filter((v) => v.toLowerCase().indexOf(term) > -1)
+                            // exclude powers of this character
+                            .filter((o) => !this.form.value.powers.includes(o))
+                            // limit to 10
+                            .slice(0, 10)
+                    )
+                );
             })
         );
 }
