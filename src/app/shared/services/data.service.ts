@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, QueryFn } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 import { Model } from '../models/model';
 
@@ -20,7 +20,7 @@ export class DataService<T extends Model> {
     get(id: string): Observable<T> {
         return this.doc(id)
             .valueChanges()
-            .pipe(map((data) => ({ id, ...data })));
+            .pipe(map((data) => ({ ...data, id })));
     }
 
     async save(data: T): Promise<T> {
