@@ -21,8 +21,7 @@
         "@schematics/angular:interceptor": {
           "skipTests": true
         },
-        "@schematics/angular:module": {
-        },
+        "@schematics/angular:module": {},
         "@schematics/angular:pipe": {
           "skipTests": true
         },
@@ -138,7 +137,13 @@
         },
         "deploy": {
           "builder": "@angular/fire:deploy",
-          "options": {}
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "comic-book:build:production",
+            "firebaseProject": "comic-book-95862",
+            "firebaseHostingSite": "comic-book-95862"
+          }
         }
       }
     }

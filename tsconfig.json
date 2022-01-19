@@ -14,7 +14,9 @@
         "lib": ["es2018", "dom"],
         "paths": {
             "shared/*": ["src/app/shared/*"]
-        }
+        },
+        "skipDefaultLibCheck": true,
+        "skipLibCheck": true
     },
     "angularCompilerOptions": {
         "fullTemplateTypeCheck": true,
