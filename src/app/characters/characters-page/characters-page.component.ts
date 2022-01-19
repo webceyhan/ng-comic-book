@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Query, QueryFn } from '@angular/fire/firestore';
+import { Query, QueryFn } from '@angular/fire/compat/firestore';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { switchMap, map } from 'rxjs/operators';
 
