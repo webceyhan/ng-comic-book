@@ -1,13 +1,4 @@
 {
-  "targets": {
-    "comic-book-95862": {
-      "hosting": {
-        "comic-book": [
-          "comic-book-95862"
-        ]
-      }
-    }
-  },
   "projects": {
     "default": "comic-book-95862"
   }
