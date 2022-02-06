@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, QueryFn } from '@angular/fire/compat/firestore';
+import { AngularFirestore, QueryFn, QueryGroupFn } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -64,7 +64,7 @@ export class DataService<T extends Model> {
         return this.db.collection<T>(this.path, query);
     }
 
-    protected group(query?: QueryFn<T>) {
+    protected group(query?: QueryGroupFn<T>) {
         return this.db.collectionGroup<T>(this.path, query);
     }
 
