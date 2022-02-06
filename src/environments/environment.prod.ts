@@ -7,8 +7,7 @@ export const environment = {
         projectId: 'comic-book-95862',
         storageBucket: 'comic-book-95862.appspot.com',
         messagingSenderId: '830881748952',
-        appId: '1:830881748952:web:7c8b7224f44fb4faad84ad',
-        measurementId: 'G-JWEGKXKQYW',
-        locationId: 'europe-west',
+        appId: '1:830881748952:web:6d6c4b353fd613ddad84ad',
+        measurementId: 'G-0EMJJHVQN8',
     },
 };
