@@ -1,4 +1,4 @@
-[![Deploy to Firebase](https://github.com/webceyhan/comic-book/actions/workflows/firebase-hosting-merge.yml/badge.svg)](https://github.com/webceyhan/comic-book/actions/workflows/firebase-hosting-merge.yml)
+[![Deploy to Firebase](https://github.com/webceyhan/ng-comic-book/actions/workflows/firebase-hosting-merge.yml/badge.svg)](https://github.com/webceyhan/ng-comic-book/actions/workflows/firebase-hosting-merge.yml)
 
 
 # ComicBook

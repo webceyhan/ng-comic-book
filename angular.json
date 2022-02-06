@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "comic-book": {
+    "ng-comic-book": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:class": {
@@ -36,7 +36,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/comic-book",
+            "outputPath": "dist/ng-comic-book",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -92,18 +92,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "comic-book:build"
+            "browserTarget": "ng-comic-book:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "comic-book:build:production"
+              "browserTarget": "ng-comic-book:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "comic-book:build"
+            "browserTarget": "ng-comic-book:build"
           }
         },
         "test": {
@@ -127,11 +127,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "comic-book:serve"
+            "devServerTarget": "ng-comic-book:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "comic-book:serve:production"
+              "devServerTarget": "ng-comic-book:serve:production"
             }
           }
         },
@@ -140,13 +140,13 @@
           "options": {
             "prerender": false,
             "ssr": false,
-            "browserTarget": "comic-book:build:production",
-            "firebaseProject": "comic-book-95862",
-            "firebaseHostingSite": "comic-book-95862"
+            "browserTarget": "ng-comic-book:build:production",
+            "firebaseProject": "ng-comic-book-95862",
+            "firebaseHostingSite": "ng-comic-book-95862"
           }
         }
       }
     }
   },
-  "defaultProject": "comic-book"
+  "defaultProject": "ng-comic-book"
 }
