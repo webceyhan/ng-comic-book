@@ -22,7 +22,7 @@
     "@angular/router": "~13.2.0",
     "@fortawesome/fontawesome-free": "^5.13.0",
     "@ng-bootstrap/ng-bootstrap": "^11.0.0",
-    "bootstrap": "^4.6.1",
+    "bootstrap": "^5.2.3",
     "firebase": "^9.4.0",
     "rxfire": "^6.0.0",
     "rxjs": "~7.5.0",
